@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-const Input = ({ type = 'text', placeholder, value, onChange, className }) => {
+const Input = forwardRef(({ type, placeholder, value, onChange, className }, ref) => {
   return (
     <input
       type={type}
@@ -8,8 +8,9 @@ const Input = ({ type = 'text', placeholder, value, onChange, className }) => {
       value={value}
       onChange={onChange}
       className={`p-2 border rounded-3xl mb-5 w-3/4 ${className}`}
+      ref={ref}  // Use o ref aqui
     />
   );
-};
+});
 
 export default Input;

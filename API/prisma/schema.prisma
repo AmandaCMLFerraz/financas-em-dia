@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String        @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String        @unique
+  password String
+  createdAt DateTime     @default(now())
+  transactions Transaction[] // Relacionamento com as transações
+}
+
+// Modelo para transações financeiras
+model Transaction {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String      @db.ObjectId  // Referência ao usuário
+  user         User        @relation(fields: [userId], references: [id]) // Relacionamento com User
+  amount       Float
+  type         String      // "income" (entrada) ou "expense" (saída)
+  tags         String[]
+  createdAt    DateTime    @default(now())
+  categoryId   String?     @db.ObjectId // Referência opcional a uma categoria
+  category     Category?   @relation(fields: [categoryId], references: [id])
+}
+
+
+// Opcional: Modelo para categorias de transações
+model Category {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  name         String        @unique
+  description  String?
+  transactions Transaction[] // Relacionamento com transações
+}

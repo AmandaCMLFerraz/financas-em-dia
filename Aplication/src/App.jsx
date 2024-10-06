@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+import Category from './pages/Category'
 
 function App() {
 
@@ -10,7 +11,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Login />}/>
         <Route path='/Register' element={<Register />}/>
-        <Route path='/Home' element={<Home />}/>
+        <Route path='/Dashboard' element={<Dashboard />}/>
+        <Route path='/Category' element={<Category />}/>
       </Routes>
     </BrowserRouter>
   )
