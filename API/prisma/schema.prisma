@@ -43,3 +43,5 @@ model Category {
   description  String?
   transactions Transaction[] // Relacionamento com transações
 }
+
+// npx prisma migrate dev --name remove-tags
