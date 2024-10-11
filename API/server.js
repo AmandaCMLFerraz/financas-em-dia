@@ -19,3 +19,4 @@ app.listen(3000, () => console.log('Servidor rodando'))
 
 //amandaferraz
 //Amand@1806
+//node --watch server.js
