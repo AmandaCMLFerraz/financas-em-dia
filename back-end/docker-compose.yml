@@ -1,8 +1,6 @@
-version: '4.41.2'
-
 services:
   api-financas-em-dia:
-    image: bitnami/postgresql
+    image: bitnami/postgresql:latest
     ports: 
       - 5432:5432
     environment: 

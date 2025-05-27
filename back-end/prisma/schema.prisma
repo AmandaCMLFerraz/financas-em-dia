@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -14,11 +8,58 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id String @id @default(uuid())
-  name String 
-  email String @unique
-  password String 
+model Usuario {
+  id         String      @id @default(uuid())
+  nome       String
+  email      String      @unique
+  senha_hash String
+  Transacoes  Transacao[]
 
-  @@map("users")
+  @@map("usuarios")
+}
+
+model TipoTransacao {
+  id        String      @id @default(uuid())
+  descricao String
+  Transacoes Transacao[]
+
+  @@map("tipos_transacoes")
+}
+
+model FormaPagamento {
+  id        String      @id @default(uuid())
+  descricao String
+  Transacoes Transacao[]
+
+  @@map("formas_pagamentos")
+}
+
+model Categoria {
+  id        String      @id @default(uuid())
+  descricao String
+  Transacoes Transacao[]
+
+  @@map("categorias")
+}
+
+model Transacao {
+  id         String   @id @default(uuid())
+  uduario_id String
+  data       DateTime
+  valor      Float
+  descricao  String?
+
+  usuario    Usuario @relation(fields: [usuario_id], references: [id])
+  usuario_id String
+
+  tipo_transacao    TipoTransacao @relation(fields: [tipo_transacao_id], references: [id])
+  tipo_transacao_id String
+
+  forma_pagamento    FormaPagamento @relation(fields: [forma_pagamento_id], references: [id])
+  forma_pagamento_id String
+
+  categoria    Categoria @relation(fields: [categoria_id], references: [id])
+  categoria_id String
+
+  @@map("transacoes")
 }
