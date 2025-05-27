@@ -9,6 +9,6 @@ prisma.user.create({
     data: {
         name: 'Amanda Ferraz',
         email: 'amandacferraz@hotmail.com',
-        password: 'Amand@1806',
+        password: 'Amand@1806', 
     },
 })
