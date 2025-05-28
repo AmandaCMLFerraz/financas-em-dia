@@ -8,58 +8,58 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario {
+model User {
   id         String      @id @default(uuid())
-  nome       String
+  name       String
   email      String      @unique
-  senha_hash String
-  Transacoes  Transacao[]
+  password_hash String
+  Transactions  Transaction[]
 
-  @@map("usuarios")
+  @@map("users")
 }
 
-model TipoTransacao {
+model TransactionType {
   id        String      @id @default(uuid())
-  descricao String
-  Transacoes Transacao[]
+  description String
+  Transactions  Transaction[]
 
-  @@map("tipos_transacoes")
+  @@map("transaction_types")
 }
 
-model FormaPagamento {
+model PaymentMethod {
   id        String      @id @default(uuid())
-  descricao String
-  Transacoes Transacao[]
+  description String
+  Transactions Transaction[]
 
-  @@map("formas_pagamentos")
+  @@map("payment_method")
 }
 
-model Categoria {
+model Category {
   id        String      @id @default(uuid())
-  descricao String
-  Transacoes Transacao[]
+  description String
+  Transactions Transaction[]
 
-  @@map("categorias")
+  @@map("categories")
 }
 
-model Transacao {
+model Transaction {
   id         String   @id @default(uuid())
-  uduario_id String
-  data       DateTime
-  valor      Float
-  descricao  String?
+  user_id String
+  date       DateTime
+  value      Float
+  description  String?
 
-  usuario    Usuario @relation(fields: [usuario_id], references: [id])
+  user    User @relation(fields: [user_id], references: [id])
   usuario_id String
 
-  tipo_transacao    TipoTransacao @relation(fields: [tipo_transacao_id], references: [id])
-  tipo_transacao_id String
+  transaction_type   TransactionType @relation(fields: [transaction_type_id], references: [id])
+  transaction_type_id String
 
-  forma_pagamento    FormaPagamento @relation(fields: [forma_pagamento_id], references: [id])
-  forma_pagamento_id String
+  payment_method    PaymentMethod @relation(fields: [payment_method_id], references: [id])
+  payment_method_id String
 
-  categoria    Categoria @relation(fields: [categoria_id], references: [id])
-  categoria_id String
+  category    Category @relation(fields: [category_id], references: [id])
+  category_id String
 
-  @@map("transacoes")
+  @@map("transactions")
 }
