@@ -2,8 +2,8 @@ import { PrismaTransactionTypeRepository } from "../../repositories/prisma/prism
 import { TransactionTypeUseCase } from "../transaction-type"
 
 export function makeTransactionTypeUseCase() {
-  const transactionRepository = new PrismaTransactionTypeRepository()
-  const transactionTypeUseCase = new TransactionTypeUseCase(transactionRepository)
+  const transactionTypeRepository = new PrismaTransactionTypeRepository()
+  const transactionTypeUseCase = new TransactionTypeUseCase(transactionTypeRepository)
 
   return transactionTypeUseCase
 }
