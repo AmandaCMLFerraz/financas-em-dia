@@ -44,13 +44,12 @@ model Category {
 
 model Transaction {
   id         String   @id @default(uuid())
-  user_id String
   date       DateTime
   value      Float
   description  String?
 
   user    User @relation(fields: [user_id], references: [id])
-  usuario_id String
+  user_id String
 
   transaction_type   TransactionType @relation(fields: [transaction_type_id], references: [id])
   transaction_type_id Int

@@ -10,7 +10,7 @@ CREATE TABLE "users" (
 
 -- CreateTable
 CREATE TABLE "transaction_types" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "description" TEXT NOT NULL,
 
     CONSTRAINT "transaction_types_pkey" PRIMARY KEY ("id")
@@ -18,7 +18,7 @@ CREATE TABLE "transaction_types" (
 
 -- CreateTable
 CREATE TABLE "payment_method" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "description" TEXT NOT NULL,
 
     CONSTRAINT "payment_method_pkey" PRIMARY KEY ("id")
@@ -26,7 +26,7 @@ CREATE TABLE "payment_method" (
 
 -- CreateTable
 CREATE TABLE "categories" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "description" TEXT NOT NULL,
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("id")
@@ -35,14 +35,13 @@ CREATE TABLE "categories" (
 -- CreateTable
 CREATE TABLE "transactions" (
     "id" TEXT NOT NULL,
-    "user_id" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "value" DOUBLE PRECISION NOT NULL,
     "description" TEXT,
-    "usuario_id" TEXT NOT NULL,
-    "transaction_type_id" TEXT NOT NULL,
-    "payment_method_id" TEXT NOT NULL,
-    "category_id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "transaction_type_id" INTEGER NOT NULL,
+    "payment_method_id" INTEGER NOT NULL,
+    "category_id" INTEGER NOT NULL,
 
     CONSTRAINT "transactions_pkey" PRIMARY KEY ("id")
 );
