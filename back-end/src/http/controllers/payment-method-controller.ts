@@ -4,7 +4,7 @@ import { makePaymentMethodUseCase } from "../../use-cases/factories/make-payment
 
 export async function paymentMethod(request: FastifyRequest, response: FastifyReply) {
   const paymentMethodBodySchema = z.object({
-    description: z.string(),
+    description: z.string()
   })
 
   const { description } = paymentMethodBodySchema.parse(request.body)
