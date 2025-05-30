@@ -1,5 +1,5 @@
 import { Transaction } from "../generated/prisma"
-import { TransactionRepository } from "../repositories/transaction-repository"
+import { ExtractRepository } from "../repositories/extract-repository";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error"
 
 interface ExtractUseCaseRequest {
@@ -19,11 +19,11 @@ interface ExtractUseCaseResponse {
 
 export class ExtractUseCase {
   constructor(
-    private transactionRepository: TransactionRepository) { }
+    private extractRepository: ExtractRepository) { }
 
   async execute({ transactionId, filters }: ExtractUseCaseRequest): Promise<ExtractUseCaseResponse> {
     if (transactionId) {
-      const transaction = await this.transactionRepository.findById(transactionId)
+      const transaction = await this.extractRepository.findById(transactionId)
 
       if (!transaction) {
         throw new ResourceNotFoundError()
@@ -34,7 +34,7 @@ export class ExtractUseCase {
     }
 
 
-    const transactions = await this.transactionRepository.findMany(filters) ?? []
+    const transactions = await this.extractRepository.findMany(filters) ?? []
 
     return {
       transactions,

@@ -17,10 +17,10 @@ export class PrismaExtractRepository implements ExtractRepository {
     const transactions = await prisma.transaction.findMany({
       where:{
         ...(filters.date && { date: filters.date }),
-        ...(filters.value && { number: filters.value }),
-        ...(filters.transactionTypeId && { number: filters.transactionTypeId }),
-        ...(filters.paymentMethodId && { number: filters.paymentMethodId }),
-        ...(filters.categoryId && { number: filters.categoryId }),
+        ...(filters.value && { value: filters.value }),
+        ...(filters.transactionTypeId && { transactionTypeId: filters.transactionTypeId }),
+        ...(filters.paymentMethodId && { paymentMethodId: filters.paymentMethodId }),
+        ...(filters.categoryId && { categoryId: filters.categoryId }),
       }
     })
 
