@@ -1,10 +1,9 @@
 import { compare } from "bcryptjs";
 import { UsersRepository } from "../repositories/users-repository";
-import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 import { User } from "../generated/prisma";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
-interface GetUserUseProfileCaseRequest {
+interface GetUserUseProfileUseCaseRequest {
   userId: string
 }
 
@@ -17,7 +16,7 @@ export class AuthenticateUseCase {
     private usersRepository: UsersRepository
   ) {}
 
-  async execute({ userId }: GetUserUseProfileCaseRequest): Promise<GetUserProfileUseCaseResponse> {
+  async execute({ userId }: GetUserUseProfileUseCaseRequest): Promise<GetUserProfileUseCaseResponse> {
     const user = await this.usersRepository.findById(userId)
 
     if (!user) {

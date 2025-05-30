@@ -1,8 +1,8 @@
-import { Transaction, Prisma } from "../../generated/prisma";
+import { Transaction } from "../../generated/prisma";
 import { prisma } from "../../lib/prisma";
-import { TransactionRepository } from "../transaction-repository";
+import { ExtractRepository } from "../extract-repository";
 
-export class PrismaTransactionRepository implements TransactionRepository {
+export class PrismaExtractRepository implements ExtractRepository {
   async findById(id: string): Promise<Transaction | null> {
     const transaction = await prisma.transaction.findUnique({
       where: {
@@ -25,13 +25,5 @@ export class PrismaTransactionRepository implements TransactionRepository {
     })
 
     return transactions
-  }
-
-  async create(data: Prisma.TransactionCreateInput) {
-    const transaction = await prisma.transaction.create({
-      data,
-    })
-
-    return transaction
   }
 }
