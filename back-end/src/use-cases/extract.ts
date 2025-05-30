@@ -3,7 +3,14 @@ import { TransactionRepository } from "../repositories/transaction-repository"
 import { ResourceNotFoundError } from "./errors/resource-not-found-error"
 
 interface ExtractUseCaseRequest {
-  transactionId: string
+  transactionId: string;
+  filters: {
+    date?: Date;
+    value?: number;
+    transactionTypeId?: number;
+    paymentMethodId?: number;
+    categoryId?: number;
+  }
 }
 
 interface ExtractUseCaseResponse {
@@ -12,18 +19,25 @@ interface ExtractUseCaseResponse {
 
 export class ExtractUseCase {
   constructor(
-    private transactionRepository: TransactionRepository
-  ) {}
+    private transactionRepository: TransactionRepository) { }
 
-  async execute({ transactionId }: ExtractUseCaseRequest): Promise<ExtractUseCaseResponse> {
-    const transaction = await this.transactionRepository.findById(transactionId)
+  async execute({ transactionId, filters }: ExtractUseCaseRequest): Promise<ExtractUseCaseResponse> {
+    if (transactionId) {
+      const transaction = await this.transactionRepository.findById(transactionId)
 
-    if (!transaction) {
-      throw new ResourceNotFoundError()
+      if (!transaction) {
+        throw new ResourceNotFoundError()
+      }
+      return {
+        transactions: [transaction],
+      }
     }
 
+
+    const transactions = await this.transactionRepository.findMany(filters) ?? []
+
     return {
-      transactions: [transaction],
+      transactions,
     }
   }
 }
