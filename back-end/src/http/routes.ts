@@ -14,5 +14,5 @@ export async function appRoutes(app: FastifyInstance) {
   app.post('/payment-method', paymentMethod)
   app.post('/category', category)
   app.post('/transaction', transaction)
-  app.post('extract', extract)
+  app.post('/extract', extract)
 }
