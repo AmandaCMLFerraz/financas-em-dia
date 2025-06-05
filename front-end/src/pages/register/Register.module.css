@@ -8,6 +8,10 @@
   color: #262626;
 }
 
+h1 {
+  color: #407cff;
+}
+
 .form {
   display: flex;
   flex-direction: column;
