@@ -8,10 +8,6 @@
   color: #262626;
 }
 
-h1 {
-  color: #407cff;
-}
-
 .form {
   display: flex;
   flex-direction: column;
@@ -22,6 +18,10 @@ h1 {
   padding: 24px;
 
   box-shadow: 16px 16px 12px rgba(0, 0, 0, 0.253);
+}
+
+.form h1 {
+  color: #407cff;
 }
 
 form {

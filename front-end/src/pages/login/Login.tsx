@@ -41,6 +41,7 @@ export const Login: React.FC<Props> = () => {
               width: '300px',
               '& .MuiOutlinedInput-root': {
                 borderRadius: '24px',
+                background: '#fff'
               }
             }}
           />
@@ -54,6 +55,7 @@ export const Login: React.FC<Props> = () => {
               width: '300px',
               '& .MuiOutlinedInput-root': {
                 borderRadius: '24px', // Aplica o borderRadius ao input
+                background: '#fff'
               },
             }}
           />
